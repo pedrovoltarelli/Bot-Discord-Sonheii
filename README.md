@@ -5,11 +5,13 @@ Um bot de Discord moderno, leve e personalizável, criado para melhorar a experi
 🚀 Tecnologias utilizadas
 JavaScript (Node.js)
 discord.js
+
 📦 Funcionalidades
-🎫 Sistema de tickets
-📊 Sistema de XP por mensagem
-🔨 Moderação (ban, mute, etc.)
-🧩 Painéis interativos (botões e menus)
-🖼️ Sistema de banners/customizações
-🔔 Notificações automáticas (ex: novos vídeos)
-👥 Marcação automática de staff
+
+- 🎫 Sistema de tickets
+- 📊 Sistema de XP por mensagem
+- 🔨 Moderação (ban, mute, etc.)
+- 🧩 Painéis interativos (botões e menus)
+- 🖼️ Sistema de banners/customizações
+- 🔔 Notificações automáticas (ex: novos vídeos)
+- 👥 Marcação automática de staff
