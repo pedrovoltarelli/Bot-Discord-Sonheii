@@ -123,7 +123,10 @@ async function criarTicket(interaction, tipo = 'duvidas') {
         const staffChannel = await guild.channels.fetch(staffChannelId);
         if (staffChannel) {
           const staffRoleId = process.env.STAFF_ROLE_ID;
-          const mencao = staffRoleId ? `<@&${staffRoleId}>` : '`@Staff`';
+          const adminRoleId = process.env.ADMIN_ROLE_ID;
+          const coownerRoleId = process.env.COOWNER_ROLE_ID;
+          const mencoes = [staffRoleId, adminRoleId, coownerRoleId].filter(Boolean).map(id => `<@&${id}>`).join(' ');
+          const mencao = mencoes || '`@Staff`';
           await staffChannel.send({
             content: `${mencao} — Novo ticket aberto por ${usuario}!`,
             embeds: [new EmbedBuilder()
@@ -194,7 +197,10 @@ async function chamarStaff(interaction) {
   salvarTickets(tickets);
 
   const staffRoleId = process.env.STAFF_ROLE_ID;
-  const mencao = staffRoleId ? `<@&${staffRoleId}>` : '`@Staff`';
+  const adminRoleId = process.env.ADMIN_ROLE_ID;
+  const coownerRoleId = process.env.COOWNER_ROLE_ID;
+  const mencoes = [staffRoleId, adminRoleId, coownerRoleId].filter(Boolean).map(id => `<@&${id}>`).join(' ');
+  const mencao = mencoes || '`@Staff`';
 
   await interaction.channel.send({
     content: `🔔 ${mencao} — ${interaction.user} está aguardando atendimento neste ticket!`,

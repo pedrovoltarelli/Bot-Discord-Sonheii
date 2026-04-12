@@ -84,11 +84,19 @@ module.exports = {
       }
     }
 
-    // ─── MENUS DE SELEÇÃO ────────────────────────────────────────────────────
-    if (interaction.isStringSelectMenu()) {
+    // ─── SELECT MENUS ────────────────────────────────────────────────────
+    if (interaction.isSelectMenu()) {
       const { customId, values } = interaction;
 
       try {
+        if (customId.startsWith('soft_')) {
+          const softwareModule = require('../commands/softwares/index.js');
+          if (softwareModule.handleSoftwareClick) {
+            await softwareModule.handleSoftwareClick(interaction);
+          }
+          return;
+        }
+
         if (customId === 'ticket_selecionar_tipo') {
           const tipo = values[0];
           if (TICKET_TIPOS.includes(tipo)) {

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central de Downloads</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Central de Downloads</h1>
+            <input type="text" id="searchInput" placeholder="Buscar softwares...">
+        </header>
+        <main>
+            <div class="software-grid" id="softwareGrid">
+                <!-- Software cards will be inserted here by JavaScript -->
+            </div>
+        </main>
+    </div>
+    <script>
+        // Dados dos softwares
+        const softwares = [
+            {
+                nome: "Discord.js",
+                descricao: "Biblioteca poderosa para criar bots do Discord",
+                imagem: "https://discord.js.org/#/docs/main/stable/general/welcome",
+                link: "https://discord.js.org/",
+                categoria: "Bots"
+            },
+            {
+                nome: "Node.js",
+                descricao: "Ambiente de execução JavaScript do lado do servidor",
+                imagem: "https://nodejs.org/static/images/logo.svg",
+                link: "https://nodejs.org/",
+                categoria: "Desenvolvimento"
+            },
+            {
+                nome: "Visual Studio Code",
+                descricao: "Editor de código fonte desenvolvido pela Microsoft",
+                imagem: "https://code.visualstudio.com/assets/images/home/logo-wide.svg",
+                link: "https://code.visualstudio.com/",
+                categoria: "Ferramentas"
+            }
+        ];
+
+        // Função para criar os cards de software
+        function createSoftwareCard(software) {
+            return `
+                <div class="software-card">
+                    <img src="${software.imagem}" alt="${software.nome}" class="software-image">
+                    <div class="software-info">
+                        <h2>${software.nome}</h2>
+                        <p>${software.descricao}</p>
+                        <span class="software-tag">${software.categoria}</span>
+                    </div>
+                    <a href="${software.link}" target="_blank" rel="noopener noreferrer" class="download-button">
+                        Download
+                        <i data-lucide="download" class="icon"></i>
+                    </a>
+                </div>
+            `;
+        }
+
+        // Função para renderizar os softwares
+        function renderSoftwares(softwaresList) {
+            const grid = document.getElementById('softwareGrid');
+            grid.innerHTML = softwaresList.map(createSoftwareCard).join('');
+            lucide.createIcons(); // Atualiza os ícones Lucide
+        }
+
+        // Função de busca
+        function filterSoftwares() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            const filtered = softwares.filter(software =>
+                software.nome.toLowerCase().includes(searchTerm) ||
+                software.descricao.toLowerCase().includes(searchTerm) ||
+                software.categoria.toLowerCase().includes(searchTerm)
+            );
+            renderSoftwares(filtered);
+        }
+
+        // Event listeners
+        document.getElementById('searchInput').addEventListener('input', filterSoftwares);
+
+        // Render inicial
+        renderSoftwares(softwares);
+    </script>
+</body>
+</html>
